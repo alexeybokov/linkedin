@@ -53,6 +53,12 @@ module LinkedIn
         get(path, headers)
       end
 
+      def get_share(options = {})
+        id = options.delete(:id)
+        path = "/shares/#{id}"
+        get(path, options)
+      end
+
       # Retrieve all comments for a particular network update
       #
       # @note The first 5 comments are included in the response to #network_updates
