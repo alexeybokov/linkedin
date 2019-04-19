@@ -62,8 +62,7 @@ module LinkedIn
             originalShare: "urn:li:share:#{share[:urn_share]}",
             resharedShare: "urn:li:share:#{share[:urn_share]}",
             text: { text: share[:comment] },
-            owner: "urn:li:person:#{share}",
-            author: "urn:li:person:#{share[:urn_person]}",
+            owner: "urn:li:person:#{share[:urn_person]}",
         }
         headers = { "Content-Type" => "application/json",
                     "X-Restli-Protocol-Version" => "2.0.0" }
