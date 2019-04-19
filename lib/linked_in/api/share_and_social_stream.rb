@@ -53,10 +53,21 @@ module LinkedIn
         get(path, headers)
       end
 
-      def get_share(options = {})
-        id = options.delete(:id)
-        path = "/shares/#{id}"
-        get(path, options)
+      def v2_reshare(share)
+        # path = "/shares"
+        # defaults = {:visibility => {:code => "anyone"}}
+        # post(path, MultiJson.dump(defaults.merge(share)), "Content-Type" => "application/json")
+        path = '/shares'
+        payload = {
+            originalShare: "urn:li:share:#{share[:urn_share]}",
+            resharedShare: "urn:li:share:#{share[:urn_share]}",
+            text: { text: share[:comment] },
+            owner: "urn:li:person:#{share}",
+            author: "urn:li:person:#{share[:urn_person]}",
+        }
+        headers = { "Content-Type" => "application/json",
+                    "X-Restli-Protocol-Version" => "2.0.0" }
+        post(path, MultiJson.dump(payload), headers)
       end
 
       # Retrieve all comments for a particular network update
